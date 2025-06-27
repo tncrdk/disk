@@ -17,7 +17,7 @@
           src = self;
           version = "git";
           buildInputs = with pkgs; [ cmake gcc ];
-          configurePhase = "echo $PWD && ls && echo ${src} && ls ${src} && cmake -S $src -B build -DCMAKE_INSTALL_PREFIX=$out";
+          configurePhase = "echo $PWD && ls && echo ${src} && ls ${src} && cmake -S $src -B build -DCMAKE_INSTALL_PREFIX=$out -DCMAKE_BUILD_TYPE=Release";
           buildPhase = "cmake --build build";
           # installPhase = "mkdir -p $out/bin; install -t $out/bin hello";
           installPhase = "cmake --install build";
