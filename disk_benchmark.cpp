@@ -9,6 +9,7 @@
 namespace disk_benchmark {
 
 void disk_io_benchmark(const std::string& filename, size_t file_size_mb, size_t buffer_size_kb) {
+
     size_t file_size_bytes = file_size_mb * 1024 * 1024;
     size_t buffer_size_bytes = buffer_size_kb * 1024;
     std::vector<char> buffer(buffer_size_bytes);
@@ -22,6 +23,7 @@ void disk_io_benchmark(const std::string& filename, size_t file_size_mb, size_t 
     }
 
     // --- Write Benchmark ---
+    std::cout << "------------------------" << std::endl;
     std::cout << "Benchmarking Disk Write Performance (" << file_size_mb << " MB, buffer " << buffer_size_kb << " KB)..." << std::endl;
     auto start_write = std::chrono::high_resolution_clock::now();
     std::ofstream ofs(filename, std::ios::binary | std::ios::trunc); // truncates existing file
@@ -59,6 +61,8 @@ void disk_io_benchmark(const std::string& filename, size_t file_size_mb, size_t 
     std::chrono::duration<double> duration_read = end_read - start_read;
     double read_speed_mbps = static_cast<double>(file_size_bytes) / (1024.0 * 1024.0) / duration_read.count();
     std::cout << "Read time: " << duration_read.count() << " seconds, Speed: " << read_speed_mbps << " MB/s" << std::endl;
+
+    std::cout << "------------------------\n" << std::endl;
 
     // Clean up the created file
     std::remove(filename.c_str());
